@@ -1,0 +1,33 @@
+# /etc/conf.d/sikacoind: config file for /etc/init.d/sikacoind
+
+# Config file location
+#SIKACOIND_CONFIGFILE="/etc/sikacoin/sikacoin.conf"
+
+# What directory to write pidfile to?  (created and owned by $SIKACOIND_USER)
+#SIKACOIND_PIDDIR="/var/run/sikacoind"
+
+# What filename to give the pidfile
+#SIKACOIND_PIDFILE="${SIKACOIND_PIDDIR}/sikacoind.pid"
+
+# Where to write sikacoind data (be mindful that the blockchain is large)
+#SIKACOIND_DATADIR="/var/lib/sikacoind"
+
+# User and group to own sikacoind process
+#SIKACOIND_USER="sikacoin"
+#SIKACOIND_GROUP="sikacoin"
+
+# Path to sikacoind executable
+#SIKACOIND_BIN="/usr/bin/sikacoind"
+
+# Nice value to run sikacoind under
+#SIKACOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#SIKACOIND_OPTS=""
+
+# The timeout in seconds OpenRC will wait for sikacoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+SIKACOIND_SIGTERM_TIMEOUT=60

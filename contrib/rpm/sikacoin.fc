@@ -1,0 +1,8 @@
+/usr/bin/sikacoin-cli		--	gen_context(system_u:object_r:sikacoin_exec_t,s0)
+/usr/sbin/sikacoind		--	gen_context(system_u:object_r:sikacoin_exec_t,s0)
+/usr/lib(64)?/sikacoin/sikacoind		--	gen_context(system_u:object_r:sikacoin_exec_t,s0)
+
+/etc/sikacoin(/.*)?		gen_context(system_u:object_r:sikacoin_conf_t,s0)
+/var/lib/sikacoin(/.*)?		gen_context(system_u:object_r:sikacoin_var_lib_t,s0)
+
+(/var)?/run/sikacoind(/.*)?   gen_context(system_u:object_r:sikacoin_var_run_t,s0)

@@ -1,0 +1,157 @@
+
+## <summary>policy for sikacoin</summary>
+
+
+########################################
+## <summary>
+##	Transition to sikacoin.
+## </summary>
+## <param name="domain">
+## <summary>
+##	Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`sikacoin_domtrans',`
+	gen_require(`
+		type sikacoin_t, sikacoin_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, sikacoin_exec_t, sikacoin_t)
+')
+
+
+########################################
+## <summary>
+##	Execute sikacoin server in the sikacoin domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`sikacoin_initrc_domtrans',`
+	gen_require(`
+		type sikacoin_initrc_exec_t;
+	')
+
+	init_labeled_script_domtrans($1, sikacoin_initrc_exec_t)
+')
+
+
+########################################
+## <summary>
+##	Search sikacoin lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`sikacoin_search_lib',`
+	gen_require(`
+		type sikacoin_var_lib_t;
+	')
+
+	allow $1 sikacoin_var_lib_t:dir search_dir_perms;
+	files_search_var_lib($1)
+')
+
+########################################
+## <summary>
+##	Read sikacoin lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`sikacoin_read_lib_files',`
+	gen_require(`
+		type sikacoin_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	read_files_pattern($1, sikacoin_var_lib_t, sikacoin_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage sikacoin lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`sikacoin_manage_lib_files',`
+	gen_require(`
+		type sikacoin_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_files_pattern($1, sikacoin_var_lib_t, sikacoin_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage sikacoin lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`sikacoin_manage_lib_dirs',`
+	gen_require(`
+		type sikacoin_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_dirs_pattern($1, sikacoin_var_lib_t, sikacoin_var_lib_t)
+')
+
+
+########################################
+## <summary>
+##	All of the rules required to administrate
+##	a sikacoin environment
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+## <param name="role">
+##	<summary>
+##	Role allowed access.
+##	</summary>
+## </param>
+## <rolecap/>
+#
+interface(`sikacoin_admin',`
+	gen_require(`
+		type sikacoin_t;
+		type sikacoin_initrc_exec_t;
+		type sikacoin_var_lib_t;
+	')
+
+	allow $1 sikacoin_t:process { ptrace signal_perms };
+	ps_process_pattern($1, sikacoin_t)
+
+	sikacoin_initrc_domtrans($1)
+	domain_system_change_exemption($1)
+	role_transition $2 sikacoin_initrc_exec_t system_r;
+	allow $2 system_r;
+
+	files_search_var_lib($1)
+	admin_pattern($1, sikacoin_var_lib_t)
+
+')
+

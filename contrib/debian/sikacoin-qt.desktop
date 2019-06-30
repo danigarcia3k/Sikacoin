@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Sikacoin Core
+Comment=Connect to the Sikacoin P2P Network
+Comment[de]=Verbinde mit dem Sikacoin peer-to-peer Netzwerk
+Comment[fr]=Sikacoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Sikacoin, eşten eşe kriptografik sanal para birimi
+Exec=sikacoin-qt %u
+Terminal=false
+Type=Application
+Icon=sikacoin128
+MimeType=x-scheme-handler/sikacoin;
+Categories=Office;Finance;

@@ -1,0 +1,6 @@
+usr/local/bin/sikacoin-qt usr/bin
+share/pixmaps/sikacoin32.xpm usr/share/pixmaps
+share/pixmaps/sikacoin16.xpm usr/share/pixmaps
+share/pixmaps/sikacoin128.png usr/share/pixmaps
+debian/sikacoin-qt.desktop usr/share/applications
+debian/sikacoin-qt.protocol usr/share/kde4/services/
